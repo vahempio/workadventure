@@ -207,6 +207,9 @@ services:
     restart: unless-stopped
     volumes:
       - ./turn_cert:/cert:ro
+    ports:
+      - "3478:3478/udp"
+      - "5349:5349/udp"
     command:
       - turnserver
       #- -c=/etc/coturn/turnserver.conf
@@ -230,7 +233,7 @@ services:
       - --pkey=/cert/privkey.pem
     labels:
       - "traefik.enable=false"
-    network_mode: host
+    #network_mode: host
 
 networks:
   backend:
