@@ -41,9 +41,9 @@ services:
       - t_nwk
       - backend
     environment:
-      DEBUG_MODE: "$DEBUG_MODE"
-      JITSI_URL: $JITSI_URL
-      JITSI_PRIVATE_MODE: "$JITSI_PRIVATE_MODE"
+      DEBUG_MODE: "${DEBUG_MODE}"
+      JITSI_URL: ${JITSI_URL}
+      JITSI_PRIVATE_MODE: "${JITSI_PRIVATE_MODE}"
       HOST: "0.0.0.0"
       NODE_ENV: development
       API_URL: pusher.${ROOT_DOMAIN}
@@ -57,7 +57,7 @@ services:
       # Advice: you should instead use Coturn REST API along the TURN_STATIC_AUTH_SECRET in the Back container
       TURN_USER: ""
       TURN_PASSWORD: ""
-      START_ROOM_URL: "$START_ROOM_URL"
+      START_ROOM_URL: "${START_ROOM_URL}"
     command: yarn run start
     volumes:
       - ./front:/usr/src/app
@@ -82,12 +82,12 @@ services:
     environment:
       DEBUG: "*"
       STARTUP_COMMAND_1: yarn install
-      SECRET_JITSI_KEY: "$SECRET_JITSI_KEY"
+      SECRET_JITSI_KEY: "${SECRET_JITSI_KEY}"
       SECRET_KEY: yourSecretKey
-      ADMIN_API_TOKEN: "$ADMIN_API_TOKEN"
+      ADMIN_API_TOKEN: "${ADMIN_API_TOKEN}"
       API_URL: back:50051
-      JITSI_URL: $JITSI_URL
-      JITSI_ISS: $JITSI_ISS
+      JITSI_URL: ${JITSI_URL}
+      JITSI_ISS: ${JITSI_ISS}
     volumes:
       - ./pusher:/usr/src/app
     labels:
@@ -107,7 +107,7 @@ services:
       - t_nwk
       - backend
     environment:
-      DEBUG_MODE: "$DEBUG_MODE"
+      DEBUG_MODE: "${DEBUG_MODE}"
       HOST: "0.0.0.0"
       NODE_ENV: development
       #APACHE_DOCUMENT_ROOT: dist/
@@ -141,11 +141,11 @@ services:
       DEBUG: "*"
       STARTUP_COMMAND_1: yarn install
       SECRET_KEY: yourSecretKey
-      SECRET_JITSI_KEY: "$SECRET_JITSI_KEY"
+      SECRET_JITSI_KEY: "${SECRET_JITSI_KEY}"
       ALLOW_ARTILLERY: "true"
-      ADMIN_API_TOKEN: "$ADMIN_API_TOKEN"
-      JITSI_URL: $JITSI_URL
-      JITSI_ISS: $JITSI_ISS
+      ADMIN_API_TOKEN: "${ADMIN_API_TOKEN}"
+      JITSI_URL: ${JITSI_URL}
+      JITSI_ISS: ${JITSI_ISS}
       TURN_STATIC_AUTH_SECRET: ${TURN_AUTH_SECRET}
     volumes:
       - ./back:/usr/src/app
