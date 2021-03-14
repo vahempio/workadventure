@@ -15,7 +15,7 @@ With my tests, here is the minimal requirement for the host server:
 If you use AWS EC2, I recommend a **t3a.medium** instance as a starting point.
 Capabilities: 2 vCPU - 4 GiB RAM - EBS Storage - 5 Gbit/s network capable speed. The cost is 0,0425 USD/h in eu-west-3 (Paris) for on-demand instances.
 
-This is enougth for 2-50 peoples at the same time.
+This is enough for 2-50 people at the same time.
 
 ### Create your server instance
 I recommend the following settings:
@@ -43,7 +43,7 @@ For example, if we use the `foo.bar.com` domain, you should have these 2 reccord
 - `A` reccord type from your elasticIP to your domain `foo.bar.com`
 - `CNAME` reccord type form the wildcard `*.foo.bar.com` to `foo.bar.com`
 
-Of couse, you are free to have another setup here, according to the docker-compose configuration, this is only the minimal example here.
+Of course, you are free to have another setup here, according to the docker-compose configuration, this is only the minimal example.
 
 ### Deploy & configure the server
 On your server:
@@ -66,18 +66,21 @@ and connect a browser to https://traefik.foo.bar.com
 
 If the traefik docker network does not exist, follow the solution which is present in your output console for creating this the first time.
 
-If everything is correct, you should have a reverse proxy dashboard, with a valid certificate from Let's Encrypt, protected by a BasicAuth method. Log in with `admin:WAtraefik`. Remenber to change the password in `./traefik_files/.htpasswd`.
+If everything is correct, you should have a reverse proxy dashboard, with a valid certificate from Let's Encrypt, protected by a BasicAuth method. Log in with `admin:WAtraefik`. Remember to change the default password in `./traefik_files/.htpasswd` with the following command:
+```
+htpasswd -B -C 10 ./traefik_files/.htpasswd admin
+```
 
 If it is not the case, check your docker-compose console, the error decription will indicate you the issue.
 
 ### TURN server certificate
-For using the secured connexion with the embaded TURN server, a certificate must be provided. Today, I do not manage it dynamically, here is the manual operation:
+For using the secured connection with the embedded TURN server, a certificate must be provided. Today, it is not managed dynamically, here is the manual operation:
 - Ask Let's Encrypt for a manual certificate request with `sudo certbot certonly --standalone -d coturn.YOUR_ROOT_DOMAIN`
 - Move the obtained certificate full chain & privatekey in these respective destinations:
   - `./turn_cert/fullchain.pem`
   - `./turn_cert/privkey.pem`
 
-Be carreful: this step should be automated (or extracted from traefik certificate database). Without this action, your certificate will expire in 3 monthes. If your email address is correctly fed, you will be notified by Let's Encrypt.
+Be carreful: this step should be automated (or extracted from traefik certificate database). Without this action, your certificate will expire in 3 months. If your email address is correctly fed, you will be notified by Let's Encrypt.
 
 ### Full game
 Run the full game with:
